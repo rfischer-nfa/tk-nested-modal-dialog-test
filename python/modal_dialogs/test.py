@@ -76,7 +76,7 @@ def setup_open_dlg(widget):
 def on_open_clicked(widget):
     if widget.first_time:
         if False:
-            # using a QtMessageBox does not cause its parent eventloop to quit
+            # using a QtMessageBox also does not cause the parent dialog's eventloop to quit
             QtGui.QMessageBox.information(widget, "Invalid!", "Workspace not valid")
         else:
             app = sgtk.platform.current_bundle()
