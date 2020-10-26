@@ -62,33 +62,11 @@ class ValidityDialog(QtGui.QWidget):
 
 #
 
-import threading
-_g_connection_lock = threading.RLock()
-
 def connect():
-    global _g_connection_lock
-    _g_connection_lock.acquire()
-    try:
-        raise ValueError(2)
-    except ValueError:
-        if True:
-            return connect_with_dlg()
-        else:
-            raise
-    finally:
-        _g_connection_lock.release()
-
-def connect_with_dlg():
-    global _g_connection_lock
-    _g_connection_lock.acquire()
-    try:
-        app = sgtk.platform.current_bundle()
-        return app.engine.execute_in_main_thread(_connect_with_dlg)
-    finally:
-        _g_connection_lock.release()
-
-def _connect_with_dlg():
     app = sgtk.platform.current_bundle()
+    if False:
+        # clearing the busy here fixes the problem
+        app.engine.clear_busy()
     result, widget = app.engine.show_modal("Connection Form", app, ConnectionForm, setup_open_dlg)
     print result, widget
 
@@ -97,9 +75,12 @@ def setup_open_dlg(widget):
 
 def on_open_clicked(widget):
     if widget.first_time:
-        #QtGui.QMessageBox.information(widget, "Invalid!", "Workspace not valid")
-        app = sgtk.platform.current_bundle()
-        app.engine.show_modal('Invalid!', app, ValidityDialog)
+        if False:
+            # using a QtMessageBox does not cause its parent eventloop to quit
+            QtGui.QMessageBox.information(widget, "Invalid!", "Workspace not valid")
+        else:
+            app = sgtk.platform.current_bundle()
+            app.engine.show_modal('Invalid!', app, ValidityDialog)
         widget.first_time = False
     else:
         widget.close()
