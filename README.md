@@ -17,3 +17,5 @@ The event loops of both the inner and outer modal dialogs are quitting.
 Per documentation their event loops should only exit when their window closes.
 
 Calling engine.clear_busy() before show_modal fixes this.
+
+Note: there is also a tests directory in this demo. While it seemingly reproduces the same chain of operations it doesn't reproduce the issue.

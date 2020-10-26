@@ -47,4 +47,8 @@ class TestNestedDialogs(TankTestBase):
     def test_run_cmds(self):
         for name in self.cmd_names:
             cmd = self.engine.commands[name]
-            cmd['callback']()
+            try:
+                self.engine.show_busy('So busy!', 'Yes indeed')
+                cmd['callback']()
+            finally:
+                self.engine.clear_busy()
