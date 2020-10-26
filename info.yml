@@ -1,0 +1,16 @@
+configuration:
+
+supported_engines: 
+
+requires_shotgun_fields:
+
+display_name: "Test Nested Modal Dialogs"
+description: "Test Nested Modal Dialogs"
+
+requires_shotgun_version:
+requires_core_version: "v0.14.133"
+requires_engine_version:
+
+frameworks:
+    - {"name": "tk-framework-shotgunutils", "version": "v5.x.x"}
+    - {"name": "tk-framework-qtwidgets", "version": "v2.x.x", "minimum_version": "v2.7.0"}
