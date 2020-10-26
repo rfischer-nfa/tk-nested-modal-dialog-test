@@ -43,3 +43,7 @@ venv
 
 # VS Code
 .vscode
+
+# pytest caches
+__pycache__
+.pytest_cache
